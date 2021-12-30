@@ -178,7 +178,6 @@ function clearScore() {
   updateNumber('computerWins',computerWins)
   updateNumber('playerWins',playerWins)
   updateNumber('roundCounter',roundCounter)
- 
 }
 
 /* Winner Modal Display at the Conclusion of a Match */
@@ -187,12 +186,14 @@ function fiveWinsMatch() {
   var span = document.getElementsByClassName("close")[0];
   var resultsBody = document.querySelector(".modal-body");
   var resultsHeader = document.querySelector(".modal-header");
+  document.removeEventListener("keydown", eventKey);
   span.onclick = function() {
     modal.style.display = "none";
     while (resultsBody.firstChild) {
       resultsBody.removeChild(resultsBody.lastChild);
     }
     resultsHeader.removeChild(resultsHeader.lastChild);
+    document.addEventListener("keydown", eventKey);
     clearScore();
   }
   var content = document.createElement('p');
@@ -201,11 +202,11 @@ function fiveWinsMatch() {
   var header = document.createElement('h2');
 
   if (computerWins < playerWins) {
-    header.textContent = "Defeat!";
+    header.textContent = "Victory!";
     content.textContent = "Fasinating, you have defeated me." 
   }
   else {
-    header.textContent = "Victory!";
+    header.textContent = "Defeat!";
     content.textContent = "One day the game may be yours, today is not that day.";
   }
   resultsHeader.appendChild(header);
@@ -228,15 +229,16 @@ function alertButton(e) {
  
  /* Handle Key press from user */
  function eventKey(e) {
-   var div = document.querySelector(`.key[data-key="${e.keyCode}"`);
-   var play = div.querySelector('.play')
-   hp = play.innerText.toLowerCase()
-   div.classList.toggle('playing');
-   let gr = gameRound(hp);
-   returnWin(gr);
- };
+  var keyed = document.querySelector(`.key[data-key="${e.keyCode}"`);
+  var play = keyed.querySelector('.play')
+  hp = play.innerText.toLowerCase()
+  keyed.classList.toggle('playing');
+  let gr = gameRound(hp);
+  returnWin(gr); 
+  
+};
 
-/* Reutrn the play name capitalized for when I haven't created a cleaver win message */
+/* Return the play name capitalized for when I haven't created a clever win message */
 function capitalize(play) {
 return play.charAt(0).toUpperCase() + play.slice(1)
 }
