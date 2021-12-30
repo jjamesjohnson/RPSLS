@@ -1,6 +1,6 @@
 html {
   font-size: 10px;
-  background: url(./spock.jpg) top center;
+  background: url(./spock_graffiti.jpg) top center;
   background-size: cover;
 }
 
@@ -193,4 +193,9 @@ button, input[type="submit"]{
   padding: 2rem .5rem;
   background-color: rgba(0,0,0,0.4);
   color: white;
+}
+
+.modal-footer a{
+  color: white;
+  text-decoration: none;
 }
